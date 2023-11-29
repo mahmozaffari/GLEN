@@ -36,6 +36,7 @@ dataset_config:
       - vqa2/reliable_vqa/annotations/imdb_val2014-dev.npy
       test:
       - vqa2/reliable_vqa/annotations/imdb_val2014-test.npy
+    save_logit_dir: ${env.save_dir}/logits
 
 optimizer:
   type: adam_w

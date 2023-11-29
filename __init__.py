@@ -13,3 +13,5 @@ import reliable_vqa.models.select_pythia
 import reliable_vqa.models.select_vilbert
 import reliable_vqa.models.select_visual_bert
 import reliable_vqa.models.select_movie_mcan
+import reliable_vqa.trainers.compress_trainer
+import reliable_vqa.trainers.ensemble_trainer

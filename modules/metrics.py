@@ -4,6 +4,8 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 
+# This file is slightly modified from the original version in the reliable_vqa repository: https://github.com/facebookresearch/reliable_vqa/models/metrics.py
+
 import os
 import torch
 import torch.nn.functional as F

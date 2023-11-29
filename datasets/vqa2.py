@@ -4,6 +4,8 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 
+# This file is modified version from its original verion in reliable_vqa repository at: https://github.com/facebookresearch/reliable_vqa
+
 import os
 import torch
 from typing import Dict
@@ -21,12 +23,18 @@ class VQA2DatasetExtended(VQA2Dataset):
 
         if self.save_logits:
             self.save_logit_dir = config["save_logit_dir"]
+            # MODIFIED: create directory if it does not exist
+            if not os.path.exists(self.save_logit_dir):
+                os.makedirs(self.save_logit_dir)
 
         self.save_confs = config.get("save_confs", False)
         self.save_conf_dir = None
 
         if self.save_confs:
             self.save_conf_dir = config["save_conf_dir"]
+            # MODIFIED: create directory if it does not exist
+            if not os.path.exists(self.save_conf_dir):
+                os.makedirs(self.save_conf_dir)
 
     def add_answer_info(self, sample_info, sample):
         if "answers" in sample_info:

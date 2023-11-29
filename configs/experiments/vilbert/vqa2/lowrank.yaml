@@ -62,6 +62,7 @@ evaluation:
       - scores
       - answers_indices
       - confidences
+      - mc_indices
   metrics:
   - vqa_accuracy
   - type: risk_coverage
@@ -69,7 +70,7 @@ evaluation:
     datasets:
     - vqa2_extended
     params:
-      save_dir: ${env:MMF_SAVE_DIR, ./save}
+      save_dir: ${env.save_dir} #${env:MMF_SAVE_DIR, ./save}
       precomputed_threshold_file: null
       risk_tolerances:
       - 0.01
@@ -81,26 +82,38 @@ evaluation:
     datasets:
     - vqa2_extended
     params:
-      save_dir: ${env:MMF_SAVE_DIR, ./save}
+      save_dir: ${env.save_dir} #${env:MMF_SAVE_DIR, ./save}
       precomputed_cost_threshold_file: null
       cost_values:
       - 1
       - 10
       - 100
+  - type: ece
+    key: ece
+    params:
+      n_bins: 20
 
+compress:
+  ratio: 0.1
+  layers:
+  - model.classifier.1
 
 training:
-  batch_size: 896
+  trainer: compress
+  batch_size: 128
   lr_scheduler: true
   clip_gradients: false
   # Don't forget to update schedule_attributes if you update this
-  max_updates: 88000
+  max_updates: 1000 #88000
   find_unused_parameters: true
   early_stop:
-    criteria: vqa2_extended/vqa_accuracy
-    minimize: false
+    criteria: vqa2_extended/risk_coverage/auc #vqa2_extended/vqa_accuracy
+    minimize: true #false
+  evaluation_interval: 100
+  log_interval: 10
 
 checkpoint:
   pretrained_state_mapping:
     model.bert: model.bert
     model.classifier: model.classifier
+  max_to_keep: 1

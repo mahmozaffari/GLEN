@@ -34,6 +34,11 @@ dataset_config:
       - vqa2/reliable_vqa/annotations/imdb_val2014-test.npy
     save_logit_dir: ${env.save_dir}/logits
 
+ensemble:
+  params:
+    - ./saves/reliable_vqa/pythia+maxprob/vanilla
+    - ./saves/reliable_vqa/pythia+maxprob/vanilla2
+
 optimizer:
   type: adam_w
   params:
@@ -62,6 +67,7 @@ evaluation:
       - scores
       - answers_indices
       - confidences
+      - mc_indices
   metrics:
   - vqa_accuracy
   - type: risk_coverage
@@ -69,7 +75,7 @@ evaluation:
     datasets:
     - vqa2_extended
     params:
-      save_dir: ${env:MMF_SAVE_DIR, ./save}
+      save_dir: ${env.save_dir} #${env:MMF_SAVE_DIR, ./save}
       precomputed_threshold_file: null
       risk_tolerances:
       - 0.01
@@ -81,16 +87,21 @@ evaluation:
     datasets:
     - vqa2_extended
     params:
-      save_dir: ${env:MMF_SAVE_DIR, ./save}
+      save_dir: ${env.save_dir} #${env:MMF_SAVE_DIR, ./save}
       precomputed_cost_threshold_file: null
       cost_values:
       - 1
       - 10
       - 100
+  - type: ece
+    key: ece
+    params:
+      n_bins: 20
 
 
 training:
-  batch_size: 896
+  trainer: ensemble_logits
+  batch_size: 64 # 896
   lr_scheduler: true
   clip_gradients: false
   # Don't forget to update schedule_attributes if you update this
@@ -104,3 +115,4 @@ checkpoint:
   pretrained_state_mapping:
     model.bert: model.bert
     model.classifier: model.classifier
+  max_to_keep: 2
