@@ -2,6 +2,8 @@
 # This code is a modified version from its original version in the MMF repository at: mmf/mmf/trainers/mmf_trainer.py
 # This trainer is modified to support compression of the model
 
+# This code is based on the mmf_trainer in the MMF repository at: mmf/mmf/trainers/mmf_trainer.py
+
 import logging
 import warnings
 
@@ -28,7 +30,7 @@ import os
 import pickle as pkl
 torch.autograd.set_detect_anomaly(True)
 
-from reliable_vqa.modules.decompose import Compression, get_ranks_per_layer
+from GLEN.modules.decompose import Compression, get_ranks_per_layer
 
 
 logger = logging.getLogger(__name__)

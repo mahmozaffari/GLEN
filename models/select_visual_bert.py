@@ -9,7 +9,8 @@ from mmf.common.registry import registry
 from mmf.utils.torchscript import getattr_torchscriptable
 from mmf.models.visual_bert import VisualBERT
 
-from reliable_vqa.models.selective_predictors import SelectivePredictor
+from GLEN.models.selective_predictors import SelectivePredictor
+#from reliable_vqa.models.selective_predictors import SelectivePredictor
 
 
 @registry.register_model("select_visual_bert")

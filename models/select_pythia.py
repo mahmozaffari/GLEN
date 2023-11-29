@@ -7,7 +7,8 @@
 from mmf.common.registry import registry
 from mmf.models.pythia import Pythia
 
-from reliable_vqa.models.selective_predictors import SelectivePredictor
+from GLEN.models.selective_predictors import SelectivePredictor
+#from reliable_vqa.models.selective_predictors import SelectivePredictor
 
 
 @registry.register_model("select_pythia")

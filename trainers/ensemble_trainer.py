@@ -1,4 +1,7 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
+
+# This code is a modified version from its mmf_trainer in the MMF repository at: mmf/mmf/trainers/mmf_trainer.py
+
 import logging
 import warnings
 
@@ -15,7 +18,7 @@ from mmf.trainers.callbacks.lr_scheduler import LRSchedulerCallback
 from mmf.trainers.core.callback_hook import TrainerCallbackHookMixin
 from mmf.trainers.core.device import TrainerDeviceMixin
 #Modified:
-from reliable_vqa.trainers.core.ensemble_evaluation_loop import TrainerEnsembleEvaluationLoopMixin
+from GLEN.trainers.core.ensemble_evaluation_loop import TrainerEnsembleEvaluationLoopMixin
 #END Modified
 from mmf.trainers.core.profiling import TrainerProfilingMixin
 from mmf.trainers.core.training_loop import TrainerTrainingLoopMixin

@@ -12,7 +12,8 @@ from torch import Tensor
 from mmf.common.registry import registry
 from mmf.models.vilbert import ViLBERTForClassification, ViLBERT
 
-from reliable_vqa.models.selective_predictors import SelectivePredictor
+from GLEN.models.selective_predictors import SelectivePredictor
+# from reliable_vqa.models.selective_predictors import SelectivePredictor
 
 
 class CustomViLBERTForClassification(ViLBERTForClassification):

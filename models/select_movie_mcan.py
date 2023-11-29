@@ -10,7 +10,8 @@ from mmf.common.registry import registry
 from mmf.utils.general import filter_grads
 from mmf.models.movie_mcan import MoVieMcan
 
-from reliable_vqa.models.selective_predictors import SelectivePredictor
+from GLEN.models.selective_predictors import SelectivePredictor
+#from reliable_vqa.models.selective_predictors import SelectivePredictor
 
 
 @registry.register_model("select_movie_mcan")

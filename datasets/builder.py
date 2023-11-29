@@ -7,7 +7,8 @@
 from mmf.common.registry import registry
 from mmf.datasets.builders.vqa2.builder import VQA2Builder
 
-from reliable_vqa.datasets.vqa2 import VQA2DatasetExtended
+from GLEN.datasets.vqa2 import VQA2DatasetExtended
+#from reliable_vqa.datasets.vqa2 import VQA2DatasetExtended
 
 
 @registry.register_builder("vqa2_extended")
