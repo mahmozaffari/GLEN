@@ -27,13 +27,36 @@ python bash_run_train.py --batch_size $bs --model model_name --selector "maxprob
 ```
 2. Training by GLF loss:
 ```
-python bash_run_train.py --model model_name --selector "maxprob" --config "gfl.yaml" --ename "GLF_lambda${lambda}"  --rid $rid --trainer "mmf" --trainer_param $lambda --run_type 'train-val' --user_dir path/to/user_dir  --save_dir_root path/to/save_dir_root --data_dir path/to/data_dir --json #--resume 'current' --resume_dir /home/mm3424/Saves/reliable_vqa/$model+maxprob/DRO_lambda${lambda}_bs$bs-$rid --json --args "checkpoint.reset.optimizer=False" #--args "training.max_updates=360000"
+python bash_run_train.py --model model_name --selector "maxprob" --config "gfl.yaml" --ename "GLF_lambda${lambda}"  --rid $rid --trainer "mmf" --trainer_param $lambda --run_type 'train-val' --user_dir path/to/user_dir  --save_dir_root path/to/save_dir_root --data_dir path/to/data_dir --json
 ```
 
 to resume training, add the following arguments:
 ```
---resume 'current' --resume_dir path/to/experiment_dir
+...   --resume 'current' --resume_dir path/to/experiment_dir
 ```
+3. Testing Models:
+
+To test on the VQA-v2 dataset run the following command:
+```
+python bash_run_train.py --batch_size batch_size --model model_name --selector "maxprob" --config "defaults.yaml" --ename exp_name   --rid $rid --trainer "mmf" --run_type 'val-test' --user_dir path/to/user_dir  --save_dir_root path/to/save_dir_root --resume 'best' --resume_dir path/to/experiment_dir --save_logits --json --add_mc 
+```
+to test on the AdVQA dataset, add the following to the end of the command:
+```
+... --args "dataset_config.vqa2_extended.annotations.test='data/val2017_advqa.npy'"
+```
+for the movie_mcan model, use 'data/val2017_advqa_clip.npy' in the above command.
+
+4. Low-rank Factorize:
+```
+
+```
+
+
+6. Ensembling:
+```
+python bash_run_train.py --model model_name --selector "maxprob" --config "ensemble.yaml" --trainer 'ensemble' --ename exp_name --rid 0  --run_type 'val-test' --user_dir $user_dir  --save_dir_root $save_dir_root --data_dir $data_dir --json  --add_mc --args $ensemble_params
+```
+
 
 
 
