@@ -17,7 +17,7 @@ To set up this project, you will need to follow the installation instructions fo
 
 ## Usage
 
-###Training Models
+**Training Models**
 
 Our project offers various scripts to train models under different configurations:
 
@@ -47,8 +47,9 @@ to test on the AdVQA dataset, add the following to the end of the command:
 for the movie_mcan model, use 'data/val2017_advqa_clip.npy' in the above command.
 
 4. Low-rank Factorize:
+To low-rank factorize a pre-trained model, you must specify a ```compress_ratio``` between 0 and 1.
 ```
-
+python bash_run_train.py --model model_name --selector "maxprob" --config "defaults_compress.yaml" --ename compress_exp_name  --rid 0 --trainer "compress" --compress_trainer_param compress_ratio  --run_type 'test-val' --user_dir path/to/user_dir  --save_dir_root path/to/save_dir_root --data_dir path/to/data_dir --resume 'best' --resume_dir path/to/trained_model_experiment_name  --save_logits --json --add_mc
 ```
 
 
