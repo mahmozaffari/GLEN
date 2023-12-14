@@ -52,11 +52,12 @@ To low-rank factorize a pre-trained model, you must specify a ```compress_ratio`
 python bash_run_train.py --model model_name --selector "maxprob" --config "defaults_compress.yaml" --ename compress_exp_name  --rid 0 --trainer "compress" --compress_trainer_param compress_ratio  --run_type 'test-val' --user_dir path/to/user_dir  --save_dir_root path/to/save_dir_root --data_dir path/to/data_dir --resume 'best' --resume_dir path/to/trained_model_experiment_name  --save_logits --json --add_mc
 ```
 
-
-6. Ensembling:
+5. Ensembling:
+Before running the ensembling command, the models must be evaluated with the ```--save_logits``` argument set. This will save the output logits in /path/to/experiment_name/vqq2_extended_modelname_seed/reports/logits. The saved logits are ensembled, and evaluated by the below command:
 ```
-python bash_run_train.py --model model_name --selector "maxprob" --config "ensemble.yaml" --trainer 'ensemble' --ename exp_name --rid 0  --run_type 'val-test' --user_dir $user_dir  --save_dir_root $save_dir_root --data_dir $data_dir --json  --add_mc --args $ensemble_params
+python bash_run_train.py --model model_name --selector "maxprob" --config "ensemble.yaml" --trainer 'ensemble' --ename exp_name --rid 0  --run_type 'val-test' --user_dir path/to/user_dir  --save_dir_root path/to/save_dir_root --data_dir path/to/data_dir --json  --add_mc --args "ensemble.params=['path/to/model1','path/to/model2','path/to/model3']"
 ```
+```path/to/model``` arguments must be the paths to the reports folders as mentioned above.
 
 
 
